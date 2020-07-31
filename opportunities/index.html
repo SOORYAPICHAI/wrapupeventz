@@ -6,9 +6,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../../config.js"></script>
     </head>
-    <body>
+    <body onload="_funcFetchCategories()">
       
       <div class="info">
         <h1>Wrap Up Eventz</h1>
@@ -36,8 +37,58 @@
         </div>
       </div>
       </div>
+      <label id="error-label" class="details-box">Please select or create an category</label>
+      <div id="select">
+      <h1>Please select your profile</h1>
+      <div class="select">
+        <select name="slct" id="category-select">
+          <option selected disabled value="">Choose an option</option>
+        </select>
+      </div>
+
+      <div class="buttons">
+        <!-- <button class="-bg-yellow">
+          <span>Sign up &amp;</span>
+          <span>Work with Rippling</span>
+          
+          <div class="arrowPacman">
+            <div class="arrowPacman-clip">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
+              </svg>
+              
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        </button> -->
       
-      <form class="steps" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="">
+        <button class="-bg-purple" onclick="handlenext()">
+          <span>Sign up &amp;</span>
+          <span>Use your own broker</span>
+          
+          <div class="arrowPacman">
+            <div class="arrowPacman-clip">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
+              </svg>
+              
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        </button>
+      </div>
+      
+      <!-- Shameless plug 😉 -->
+      <a class="twitter" href="https://twitter.com/KeenanPayne_" title="Follow me on Twitter" target="_blank">
+          <img src="https://assets.codepen.io/174608/twitter.svg" />
+      </a>
+
+    </div>
+      <form class="steps" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="" id="form" style="display: none;">
         <ul id="progressbar">
           <li class="active">User Information</li>
           <li>Aquisition</li>
@@ -290,6 +341,7 @@
           <h3 class="fs-subtitle">Thank you for trying out our marketing grader, please go check your email for your fundraising report card and some helpful tips to improve it!</h3>
           <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-3">What Is This?</div>
         </fieldset>
+        </form>
   </body>
   
   <script>
@@ -300,6 +352,100 @@
 * Plug-ins: jQuery Validate, jQuery 
 * Easing
 */
+const _funcFetchCategories = async () => {
+        // $('#category-select').append(`<option value="${'optionValue'}"> 
+        //                                    ${'optionText'} 
+        //                               </option>`); 
+        let _selectValue = document.getElementById('category-select')
+
+        let body = { view_categories: true }
+        await fetch(`${Api}api/createcategories`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(response => response.json())
+            .then(async commits => {
+                console.log(commits, "commits")
+                if (await commits) {
+                    return new Promise(async (resolve, reject) => {
+                        const calls = commits.map((val) => {
+                            $('#category-select').append(`<option value="${val._id}"> 
+                                          ${val.type} 
+                                     </option>`);
+                        })
+                        Promise.all(calls)
+                            .then((data) => {
+                            
+                                resolve(data);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    });
+                    debugger
+
+
+                }
+            });
+
+
+    }
+
+    const fetchQuestions = async() =>{
+        let body = {category_id:localStorage.getItem('jobCategory')}
+        await fetch(`${Api}api/fetchquestions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(response => response.json())
+            .then(async commits => {
+                console.log(commits, "commits")
+                if (await commits) {
+                    return new Promise(async (resolve, reject) => {
+                        const calls = commits.map((val) => {
+                            return val
+                        })
+                        Promise.all(calls)
+                            .then((data) => {
+                                console.log(data,"datadatadata")
+                                resolve(data);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    });
+                    debugger
+
+
+                }
+            });
+    }
+const handlenext = async() =>{
+
+    let selectCategory = document.getElementById('category-select')
+    let _currentCategory = selectCategory.value
+    let _errorLabel = document.getElementById('error-label')
+    if(_currentCategory.length > 0){
+        localStorage.setItem('jobCategory', _currentCategory)
+        document.getElementById('error-label').style.display = 'none'
+        document.getElementById('select').style.display = 'none'
+        await fetchQuestions()
+        document.getElementById('form').style.display = 'block'
+
+    }
+    else{
+        _errorLabel.style.display = 'block'
+            _errorLabel.classList.add("details-box");
+            setTimeout(() => { _errorLabel.classList.remove("details-box") }, 1000)
+    }
+    // console.log(selectCategory.value, 'selectCategory.value')
+}
 
 $(document).ready(function() {
     var current_fs, next_fs, previous_fs;
