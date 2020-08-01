@@ -181,6 +181,7 @@
 
     <!--  -->
 
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -192,7 +193,23 @@
                 showData = document.getElementById('show-data'),
                 saveData = document.getElementById("saveData"),
                 fbOptions = {
-                    showActionButtons: false
+                    showActionButtons: false,
+                    disableFields: [
+      'autocomplete',
+      'paragraph',
+      'button',
+      'header',
+      'hidden',
+      'paragraph',
+      'starRating'
+    ],
+    disabledAttrs: ["className", "inline","toggle", "access", "name", "other", "helpetext"],
+    disabledSubtypes: {
+    textarea: ['tinymce', 'quill'],
+    text:['color', 'password'],
+    // fileUpload:['File Uploader']
+  },
+    editOnAdd: true
                 },
                 formBuilder = $(fbEditor).formBuilder(fbOptions);
 
