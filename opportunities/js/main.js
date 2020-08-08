@@ -1,53 +1,154 @@
 (function($) {
 
     var form = $("#signup-form");
+    // $('#signup-form').steps();
+
+    // $("#form").accwizard({
+        
+    //     beforeNextStep:function( element ) {alert("DSLKFJ"); }
+
+    // });
+    // $("#form").accWizard();
+    
     // form.steps({
-    //     headerTag: "h3",
+    //     // headerTag: "h3",
     //     bodyTag: "fieldset",
-    //     transitionEffect: "slideLeft",
-    //     labels: {
-    //         previous : 'Previous',
-    //         next : 'Next <i class="zmdi zmdi-long-arrow-down"></i>',
-    //         finish : 'Submit',
-    //         current : ''
-    //     },
-    //     titleTemplate : '<span class="title">#title#</span>',
-    //     onInit : function (event, currentIndex) { 
-    //         // Suppress (skip) "Warning" step if the user is old enough.
-    //     },
+    //     // transitionEffect: "slideLeft",
+    //     // labels: {
+    //     //     previous : 'Previous',
+    //     //     next : 'Next <i class="zmdi zmdi-long-arrow-down"></i>',
+    //     //     finish : 'Submit',
+    //     //     current : ''
+    //     // },
+    //     // titleTemplate : '<span class="title">#title#</span>',
+    //     // onInit : function (event, currentIndex) { 
+    //     //     Suppress (skip) "Warning" step if the user is old enough.
+    //     // },
     //     onStepChanging: function (event, currentIndex, newIndex)
     //     {
+    //         alert('sdllkfjjlkj')
     //         form.validate().settings.ignore = ":disabled,:hidden";
     //         return form.valid();
     //     },
     //     onFinishing: function (event, currentIndex)
     //     {
-    //         form.validate().settings.ignore = ":disabled";
-    //         return form.valid();
+    //         debugger
+    //         // form.validate().settings.ignore = ":disabled";
+    //         // return form.valid();
     //     },
     //     onFinished: function (event, currentIndex)
     //     {
     //         alert('Sumited');
     //     },
-    //     onStepChanged: function (event, currentIndex, priorIndex)
-    //     {
+    //     // onStepChanged: function (event, currentIndex, priorIndex)
+    //     // {
 
          
-    //     }
+    //     // }
     // });
 
+
+    
     $(".acc-wizard").accwizard({
         addButtons  : true,
         nextText : 'Next',
         nextClasses : 'au-btn',
         nextId:'deii',
-        backClasses : 'au-btn au-btn-back'
+        backClasses : 'au-btn au-btn-back',
+        beforeNext:()=>{
+            alert("vandhuten")
+        },
+        onNext:async function( element ) {
+            if( window.location.hash === '#collapseOne'){
+                debugger
+                var formData = new FormData();
+                console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
+                formData.append('file-upload', document.getElementById('imageUpload').files[0])
+        
+                // await axios.post(
+                //     `${Api}api/upload`,
+                //     formData, {
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data',
+                //         //   Authorization: localStorage.auth_token
+                //     }
+                // })
+                    // await fetch(`${Api}api/upload`, {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             // 'Content-Type': 'application/json;charset=utf-8',
+                    //             'Content-Type': 'multipart/form-data'
+                    //         },
+                    //         body: bodyUpload
+                    //     })
+                    // .then(response => console.log(response, 'response'))
+        
+                //   alert('sdlhjflsdkfjl')
+                let _obj = {}
+                //   "email","mobile","name","photo","dob","city_state","pincode"
+        
+                var ele = document.getElementsByName('gender');
+        
+                for (i = 0; i < ele.length; i++) {
+                    if (ele[i].checked) _obj['gender'] = ele[i].value
+                }
+                _obj['photo'] = 'ele[i].value '
+                await ["email", "mobile", "name", "dob", "city_state", "pincode"].map(async (val) => {
+                    var _element = document.getElementById(val).value
+                    if(_element && _element.length > 0) {
+                        debugger
+                        _obj[val] = await _element
+                    }
+                    else{
+                        debugger
+                        return false
+                    }
+                    console.log(val)
+                })
+                let body = { ..._obj }
+                await fetch(`${Api}api/updateprofile`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(body)
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        localStorage.setItem('profileId', res._val._id)
+                        window.location.hash = 'collapseTwo'
+                    })
+                console.log(_obj)
+        
+            }
+            else if(window.location.hash === '#collapseTwo'){
+                alert('deii')
+            }
+         },
+         onDestroy:() =>{
+             alert("submit")
+         }
+       
+
     });
 
-    // $('.panel-group .panel-default').on('click', function() {
-    //     $('.panel-group').find('.active').removeClass("active");
-    //     $(this).addClass("active");
+
+  
+    // $("#stepper-2").accwizard({
+    //     onStepChanging: function (event, currentIndex, newIndex)
+    //     //     {
+    //     //         form.validate().settings.ignore = ":disabled,:hidden";
+    //     //         return form.valid();
+    //     //     },
+    //     {
+    //         alert('sdlkfjsldjf')
+    //     }
     // });
+
+    $('.panel-group .panel-default').on('click', function() {
+        $('.panel-group').find('.active').removeClass("active");
+        $(this).addClass("active");
+    });
     $('.panel').on('show.bs.collapse', function (e) {
         $(this).addClass('active');
     })

@@ -56,7 +56,7 @@
     // jQuery(this).toggleClass('isOpen');
 
     jQuery.extend(jQuery.validator.messages, {
-        required: "",
+        required: "true",
         remote: "",
         email: "",
         url: "",
