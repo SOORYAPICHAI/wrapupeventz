@@ -56,7 +56,8 @@
         nextId:'deii',
         backClasses : 'au-btn au-btn-back',
         beforeNext:()=>{
-            alert("vandhuten")
+            document.getElementById('form').submit()
+            return false;
         },
         onNext:async function( element ) {
             if( window.location.hash === '#collapseOne'){
@@ -64,24 +65,25 @@
                 var formData = new FormData();
                 console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
                 formData.append('file-upload', document.getElementById('imageUpload').files[0])
+                formData.append('file-name', document.getElementById('name').value)
         
-                // await axios.post(
-                //     `${Api}api/upload`,
-                //     formData, {
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data',
-                //         //   Authorization: localStorage.auth_token
-                //     }
-                // })
+                await axios.post(
+                    `${Api}api/upload`,
+                    formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        //   Authorization: localStorage.auth_token
+                    }
+                })
                     // await fetch(`${Api}api/upload`, {
                     //         method: 'POST',
                     //         headers: {
                     //             // 'Content-Type': 'application/json;charset=utf-8',
                     //             'Content-Type': 'multipart/form-data'
                     //         },
-                    //         body: bodyUpload
+                    //         body: formData
                     //     })
-                    // .then(response => console.log(response, 'response'))
+                    .then(response => console.log(response.data.data.Location, 'response-profile'))
         
                 //   alert('sdlhjflsdkfjl')
                 let _obj = {}
