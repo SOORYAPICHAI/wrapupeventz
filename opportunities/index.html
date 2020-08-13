@@ -26,6 +26,10 @@
 </head>
 
 <body onload="_funcFetchCategories()">
+    <!-- <div id="loading" class="loadingio-spinner-blocks-qvuqcsnher"><div class="ldio-me3z71t5bx">
+        <div style='left:38px;top:38px;animation-delay:0s'></div><div style='left:80px;top:38px;animation-delay:0.125s'></div><div style='left:122px;top:38px;animation-delay:0.25s'></div><div style='left:38px;top:80px;animation-delay:0.875s'></div><div style='left:122px;top:80px;animation-delay:0.375s'></div><div style='left:38px;top:122px;animation-delay:0.75s'></div><div style='left:80px;top:122px;animation-delay:0.625s'></div><div style='left:122px;top:122px;animation-delay:0.5s'></div>
+        </div></div> -->
+        <div id="loading" class="loading"></div>
     <div class="stickyHeader">
 
         <div class="heading-form">
@@ -33,8 +37,12 @@
         </div>
         <label class="heading-form-label">Please fill out this field</label>
     </div>
+
     <div class="main">
         <div class="container" id="fill-category">
+            <!-- <div class="loadingio-spinner-spin-q8ghythqngm"><div class="ldio-10lx4zv7e24">
+                <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>
+                </div></div> -->
             <fieldset>
 
                 <div class="form-row">
@@ -44,11 +52,13 @@
                         <h1>Please select your profile</h1>
                         <div class="select">
                             <select name="slct" id="category-select">
-                                <option selected disabled>Choose an option</option>
+                                <option value="" selected disabled>Choose an option</option>
 
                             </select>
+                            
+                            
                         </div>
-
+                        
                         <button class="continue-application" onclick="handleCategory()">
                             <div>
                                 <div class="pencil"></div>
@@ -66,16 +76,7 @@
                             Continue Application
                         </button>
 
-                        <!-- dribbble - twitter -->
-                        <a class="dribbble" href="https://dribbble.com/ai" target="_blank"><img
-                                src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg"
-                                alt=""></a>
-                        <a class="twitter" target="_blank" href="https://twitter.com/aaroniker_me"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72">
-                                <path
-                                    d="M67.812 16.141a26.246 26.246 0 0 1-7.519 2.06 13.134 13.134 0 0 0 5.756-7.244 26.127 26.127 0 0 1-8.313 3.176A13.075 13.075 0 0 0 48.182 10c-7.229 0-13.092 5.861-13.092 13.093 0 1.026.118 2.021.338 2.981-10.885-.548-20.528-5.757-26.987-13.679a13.048 13.048 0 0 0-1.771 6.581c0 4.542 2.312 8.551 5.824 10.898a13.048 13.048 0 0 1-5.93-1.638c-.002.055-.002.11-.002.162 0 6.345 4.513 11.638 10.504 12.84a13.177 13.177 0 0 1-3.449.457c-.846 0-1.667-.078-2.465-.231 1.667 5.2 6.499 8.986 12.23 9.09a26.276 26.276 0 0 1-16.26 5.606A26.21 26.21 0 0 1 4 55.976a37.036 37.036 0 0 0 20.067 5.882c24.083 0 37.251-19.949 37.251-37.249 0-.566-.014-1.134-.039-1.694a26.597 26.597 0 0 0 6.533-6.774z">
-                                </path>
-                            </svg></a>
+                       
                     </div>
 
                 </div>
@@ -90,14 +91,15 @@
                     <div class="panel panel-default active">
                         <div class="panel-heading" id="headingOne">
                             <h3>
-                                <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">Basic
-                                    infomation</a>
+                                <div href="#collapseOne" data-parent="#accordion">Basic
+                                    infomation</div>
                             </h3>
                         </div>
 
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                <form method="post" action="javascript:void(0)" id="form" onsubmit="return window.location.hash='collapseTwo'">
+                                <form method="post" action="javascript:void(0)" id="form"
+                                    onsubmit="return handleProfileSubmit()">
                                     <fieldset>
 
                                         <div class="form-row">
@@ -109,7 +111,7 @@
                                             <div class="avatar-upload" id="avatar-upload">
                                                 <div class="avatar-edit">
                                                     <input type='file' id="imageUpload" name="file-upload"
-                                                        accept=".png, .jpg, .jpeg" onchange="readURL(this);"  />
+                                                        accept=".png, .jpg, .jpeg" onchange="readURL(this);" />
                                                     <label class="profilelabel" for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
@@ -151,7 +153,7 @@
                                                     <label for="gender">Gender</label>
                                                     <div class="form-flex">
                                                         <input type="radio" name="gender" value="male" id="male"
-                                                             required/>
+                                                            required />
                                                         <label for="male"><img src="images/icon-male.png"
                                                                 alt="Male"></label>
 
@@ -162,8 +164,8 @@
                                                 </div>
                                                 <div class="form-date">
                                                     <label for="dob" class="form-label">Date of birth</label>
-                                                    <input type="date" name="dob" id="dob"
-                                                        placeholder="E.g. Kardashian" required/>
+                                                    <input type="date" name="dob" id="dob" placeholder="E.g. Kardashian"
+                                                        required />
                                                 </div>
                                             </div>
 
@@ -181,7 +183,7 @@
                                             <div class="form-group">
                                                 <label for="mobile" class="form-label">Phone Number</label>
                                                 <input type="number" name="mobile" id="mobile"
-                                                    placeholder="(+ 123 ) 456 789" required/>
+                                                    placeholder="(+ 123 ) 456 789" required />
                                             </div>
                                         </div>
                                         <!-- <div class="form-row">
@@ -205,7 +207,7 @@
                                                     <label for="national" class="form-label">Nationality</label>
                                                     <div class="select-group">
 
-                                                        <select name="national" id="national" required >
+                                                        <select name="national" id="national" required>
                                                             <option value="" data-url='images/icon-vietnam.png'><img
                                                                     src="images/icon-vietnam.png" alt=""> Select
                                                             </option>
@@ -220,13 +222,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="pincode" class="form-label">Pincode</label>
-                                                <input type="number" name="pincode" id="pincode" required/>
+                                                <input type="number" name="pincode" id="pincode" required />
                                             </div>
                                         </div>
                                     </fieldset>
-                                    
+
                                     <div class="form-submit">
-                                        <input type="submit" id="nextSubmit" value="Next" class="au-btn" >
+                                        <input type="submit" id="nextSubmit" value="Next" class="au-btn">
                                     </div>
                                 </form>
                             </div>
@@ -235,8 +237,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" id="headingTwo">
                             <h3>
-                                <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">Additional
-                                    infomation</a>
+                                <div href="#collapseTwo" data-parent="#accordion">Additional
+                                    infomation</div>
                             </h3>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse">
@@ -354,16 +356,16 @@
     <script>
 
     </script>
-     <!-- JS -->
-     <script src="vendor/jquery/jquery.min.js"></script>
-     <script src="vendor/boostrap/bootstrap.min.js"></script>
-     <script src="vendor/acc-wizard-master/release/acc-wizard.min.js"></script>
-     <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-     <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-     <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
-     <script src="vendor/minimalist-picker/dobpicker.js"></script>
-     <script src="js/main.js"></script>
-    
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/boostrap/bootstrap.min.js"></script>
+    <script src="vendor/acc-wizard-master/release/acc-wizard.min.js"></script>
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="vendor/minimalist-picker/dobpicker.js"></script>
+    <script src="js/main.js"></script>
+
 
     <!-- CATEGORY RELATED FUNCTIONS -->
     <script>
@@ -384,7 +386,6 @@
             })
                 .then(response => response.json())
                 .then(async commits => {
-                    console.log(commits, "commits")
                     if (await commits) {
                         return new Promise(async (resolve, reject) => {
                             const calls = commits.map((val) => {
@@ -415,25 +416,7 @@
         let ids = []
         // TO FETCH QUESTIONS
         const _fetchQuestions = async () => {
-            // $('#category-select').append(`<option value="${'optionValue'}"> 
-            //                                    ${'optionText'} 
-            //                               </option>`); 
             let _selectValue = document.getElementById('category-select')
-            // <div class="form-row">
-            //                                 <div class="form-group">
-            //                                     <label for="email" class="form-label">Your Email</label>
-            //                                     <input type="email" name="email" id="email"
-            //                                         placeholder="E.g. john123@gmail.com" />
-            //                                 </div>
-
-            //                                 <div class="form-group">
-            //                                     <label for="phone" class="form-label">Phone Number</label>
-            //                                     <input type="number" name="phone" id="phone"
-            //                                         placeholder="(+ 123 ) 456 789" />
-            //                                 </div>
-            //                             </div>
-
-
             var _arr = []
             var _temp = []
             let body = { category_id: localStorage.getItem('_categoryId') }
@@ -459,21 +442,6 @@
                                     obj['id'] = val._id
                                     ids.push(obj)
 
-                                    debugger
-                                    // if (val.field_json.type === 'checkbox-group') {
-                                    //     _temp.push('<div class="form-group">' +
-                                    //                 '<label for="email" class="form-label">' +'Your Email'+'</label>'+
-                                    //                 '<input type="checkbox" name="email" id="email"  value="sdfsdf"/>'+
-                                    //                 '<label for="email">' +'Your Email'+'</label>'+
-                                    //             '</div>')
-                                    //             if((i+1) % 2 === 0){
-                                    //    _arr.push('<div class="form-row">' + 
-                                    //     _temp.join('')
-                                    //     +'</div>')
-
-                                    //     _temp = []
-                                    // }
-                                    // }
                                     if (val.field_json.type === 'date') {
                                         _temp.push('<div class="form-group">' +
                                             '<label for=' + val._id + ' class="form-label">' + val.field_json.label + '</label>' +
@@ -575,18 +543,18 @@
                                         }
                                     }
                                     else if (val.field_json.type === 'select') {
-                                        _temp.push('<div class="form-group">'+
-                                                '<div class="form-select">'+
-                                                    '<label for=' + val._id + ' class="form-label">' + val.field_json.label + '</label>'+
-                                                    '<div class="select-group">' +
-                                                        '<select name=' + val._id + ' id=' + val._id + '>'+
-                                                          '  <option value="sdf" selected><img src="images/icon-vietnam.png" alt=""> Viet Nam</option>'+
-                                                        '</select>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                        '</div>')
+                                        _temp.push('<div class="form-group">' +
+                                            '<div class="form-select">' +
+                                            '<label for=' + val._id + ' class="form-label">' + val.field_json.label + '</label>' +
+                                            '<div class="select-group">' +
+                                            '<select name=' + val._id + ' id=' + val._id + '>' +
+                                            '  <option value="sdf" selected><img src="images/icon-vietnam.png" alt=""> Viet Nam</option>' +
+                                            '</select>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>')
                                         // <div class="form-group">
-                                                
+
                                         //         <div class="form-select">
                                         //             <label for="national" class="form-label">Nationality</label>
                                         //             <div class="select-group">
@@ -671,6 +639,10 @@
                                 })
                                 console.log("array", _arr)
                                 document.getElementById("collapse-22").innerHTML += _arr.join("")
+                                document.getElementById('fill-category').style.display = "none";
+                document.getElementById('fill-form').style.display = "block"
+                window.location.hash="collapseOne"
+                document.getElementById('loading').style.display = 'none'
                                 resolve(data);
                             })
                             .catch((err) => {
@@ -688,10 +660,11 @@
         // 
         // PROFILE SUBMIT
         // 
-        const handleSubmit = async() => {
+        const handleSubmit = async () => {
             console.log(ids, "idsidsids");
 
             var formData = new FormData();
+            let profileId = localStorage.getItem('profileId')
             const _getValue = (id) => {
                 let _document = document.getElementById(id).value
                 return _document
@@ -703,8 +676,9 @@
                 for (var x = 0; x < _document; x++) {
                     formData.append(id, document.getElementById(id).files[x]);
                     formData.append('id', id);
+                    formData.append('profile_id', profileId)
                 }
-                console.log(_document,'_document_document')
+                console.log(_document, '_document_document')
                 return '_document'
             }
             const _getChecked = (name) => {
@@ -725,10 +699,10 @@
             const _api_obj = {}
             _api_obj['profile_id'] = localStorage.getItem('profileId')
             _api_obj['answers'] = []
-            
-                
-        
-                
+
+
+
+
             if (ids) {
                 ids.map(val => {
 
@@ -742,7 +716,7 @@
                         let _temp_storage = {}
                         _temp_storage['id'] = val.id
                         _temp_storage['answer'] = _getFile(val.id)
-                
+
                         _api_obj['answers'].push(_temp_storage)
                     }
                     else if (val.type === 'number') {
@@ -778,22 +752,22 @@
                 })
             }
             await axios.post(
-                    `${Api}api/upload`,
-                    formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        //   Authorization: localStorage.auth_token
-                    }
-                })
-                    // await fetch(`${Api}api/upload`, {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             // 'Content-Type': 'application/json;charset=utf-8',
-                    //             'Content-Type': 'multipart/form-data'
-                    //         },
-                    //         body: formData
-                    //     })
-                    .then(response => console.log(response.data.data.Location, 'response-profile'))
+                `${Api}api/upload`,
+                formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    //   Authorization: localStorage.auth_token
+                }
+            })
+                // await fetch(`${Api}api/upload`, {
+                //         method: 'POST',
+                //         headers: {
+                //             // 'Content-Type': 'application/json;charset=utf-8',
+                //             'Content-Type': 'multipart/form-data'
+                //         },
+                //         body: formData
+                //     })
+                .then(response => console.log(response.data.data.Location, 'response-profile'))
             await fetch(`${Api}api/postanswers`, {
                 method: 'POST',
                 headers: {
@@ -824,16 +798,23 @@
 
         const handleCategory = () => {
             debugger
-            localStorage.setItem('_categoryId', document.getElementById('category-select').value)
-
-            // document.getElementById('loading').style.display = "block";
-
-            _fetchQuestions()
-
-            document.getElementById('fill-category').style.display = "none";
-            document.getElementById('fill-form').style.display = "block"
-            // window.location.hash = "#collapseOne"
-
+            let getCategory = document.getElementById('category-select').value
+            if(getCategory.length > 0){
+                localStorage.setItem('_categoryId', getCategory)
+                let _category = localStorage.getItem('_categoryId')
+                if (_category) {
+                    document.getElementById('loading').style.display = 'block'
+                    _fetchQuestions()
+                }
+            }
+            else{
+                
+                var element = document.getElementById("category-select");
+                    element.classList.add("shake-vertical");
+                    
+                    setTimeout(function(){ element.classList.remove("shake-vertical"); }, 1000);
+                // document.getElementById('category-select-error').style.display = 'block'
+            }
         }
 
         // 
@@ -863,6 +844,72 @@
     <!-- PROFILE SUBMIT -->
     <script>
 
+        const handleProfileSubmit = async () => {
+            debugger
+            var formData = new FormData();
+            let data_body = {}
+            data_body['key'] = 'profile'
+            data_body['files'] = formData
+            console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
+            formData.append('profile-upload', document.getElementById('imageUpload').files[0])
+            formData.append('file-name', document.getElementById('name').value)
+
+            await axios.post(
+                `${Api}api/upload`,
+                formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    //   Authorization: localStorage.auth_token
+                }
+            })
+                // await fetch(`${Api}api/upload`, {
+                //         method: 'POST',
+                //         headers: {
+                //             // 'Content-Type': 'application/json;charset=utf-8',
+                //             'Content-Type': 'multipart/form-data'
+                //         },
+                //         body: formData
+                //     })
+                .then(response => console.log(response.data.data.Location, 'response-profile'))
+
+            //   alert('sdlhjflsdkfjl')
+            let _obj = {}
+            //   "email","mobile","name","photo","dob","city_state","pincode"
+
+            var ele = document.getElementsByName('gender');
+
+            for (i = 0; i < ele.length; i++) {
+                if (ele[i].checked) _obj['gender'] = ele[i].value
+            }
+            _obj['photo'] = 'ele[i].value '
+            await ["email", "mobile", "name", "dob", "city_state", "pincode"].map(async (val) => {
+                var _element = document.getElementById(val).value
+                if (_element && _element.length > 0) {
+                    debugger
+                    _obj[val] = await _element
+                }
+                else {
+                    debugger
+                    return false
+                }
+                console.log(val)
+            })
+            let body = { ..._obj }
+            await fetch(`${Api}api/updateprofile`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(body)
+            })
+                .then(response => response.json())
+                .then(res => {
+                    localStorage.setItem('profileId', res._val._id)
+                    window.location.hash = 'collapseTwo'
+                    // window.location.hash='collapseTwo'
+                })
+
+        }
 
 
         // 
@@ -923,9 +970,9 @@
 
     </script>
     <script>
-        document.getElementById('deii').style.display="none"
+        document.getElementById('deii').style.display = "none"
     </script>
-   
+
 </body>
 
 </html>

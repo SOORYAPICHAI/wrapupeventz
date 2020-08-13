@@ -60,72 +60,8 @@
             return false;
         },
         onNext:async function( element ) {
-            if( window.location.hash === '#collapseOne'){
-                debugger
-                var formData = new FormData();
-                console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
-                formData.append('file-upload', document.getElementById('imageUpload').files[0])
-                formData.append('file-name', document.getElementById('name').value)
-        
-                await axios.post(
-                    `${Api}api/upload`,
-                    formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        //   Authorization: localStorage.auth_token
-                    }
-                })
-                    // await fetch(`${Api}api/upload`, {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             // 'Content-Type': 'application/json;charset=utf-8',
-                    //             'Content-Type': 'multipart/form-data'
-                    //         },
-                    //         body: formData
-                    //     })
-                    .then(response => console.log(response.data.data.Location, 'response-profile'))
-        
-                //   alert('sdlhjflsdkfjl')
-                let _obj = {}
-                //   "email","mobile","name","photo","dob","city_state","pincode"
-        
-                var ele = document.getElementsByName('gender');
-        
-                for (i = 0; i < ele.length; i++) {
-                    if (ele[i].checked) _obj['gender'] = ele[i].value
-                }
-                _obj['photo'] = 'ele[i].value '
-                await ["email", "mobile", "name", "dob", "city_state", "pincode"].map(async (val) => {
-                    var _element = document.getElementById(val).value
-                    if(_element && _element.length > 0) {
-                        debugger
-                        _obj[val] = await _element
-                    }
-                    else{
-                        debugger
-                        return false
-                    }
-                    console.log(val)
-                })
-                let body = { ..._obj }
-                await fetch(`${Api}api/updateprofile`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(body)
-                })
-                    .then(response => response.json())
-                    .then(res => {
-                        localStorage.setItem('profileId', res._val._id)
-                        window.location.hash = 'collapseTwo'
-                    })
-                console.log(_obj)
-        
-            }
-            else if(window.location.hash === '#collapseTwo'){
-                alert('deii')
-            }
+            
+            
          },
          onDestroy:() =>{
              alert("submit")
