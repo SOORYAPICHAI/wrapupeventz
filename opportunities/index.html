@@ -352,6 +352,18 @@
     </div>
 
 
+    <div class="conf-modal center success" id="conf-modal" >
+        <div class="title-icon">
+          <img src="http://jimy.co/res/icon-success.jpg">
+        </div>
+        <div class="title-text"><h1>Success!</h1></div>
+        <p>Thank you. We will get back to you soon.</p>
+        <p class="link"><a href="http://wrapupeventz.com/">wrapupeventz.com</a></p>
+        <!-- <div class="modal-footer">
+          <div class="conf-but green" onClick="">Yes</div>
+          <div class="conf-but" onClick="">No</div>    
+        </div> -->
+      </div>
 
     <script>
 
@@ -438,6 +450,7 @@
                             .then(async (data) => {
                                 await data.map((val, i) => {
                                     let obj = {}
+                                    debugger
                                     obj['type'] = val.field_json.type
                                     obj['id'] = val._id
                                     ids.push(obj)
@@ -751,6 +764,8 @@
                     }
                 })
             }
+            
+            document.getElementById('loading').style.display = 'block'
             await axios.post(
                 `${Api}api/upload`,
                 formData, {
@@ -777,6 +792,13 @@
             })
                 .then(response => response.json())
                 .then(res => {
+                    document.getElementById('loading').style.display = 'none'
+                    document.getElementById('fill-form').style.display = "none"
+                    document.getElementById('conf-modal').style.display = 'block'
+                    
+                    setTimeout(()=>{
+                        window.location.replace("http://wrapupeventz.com/")
+                    },1500)
                     console.log('resOfPostAnswers', res)
                     // window.location.pathname="/opportunities"
                 })
