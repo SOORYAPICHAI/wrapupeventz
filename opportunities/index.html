@@ -29,7 +29,7 @@
     <!-- <div id="loading" class="loadingio-spinner-blocks-qvuqcsnher"><div class="ldio-me3z71t5bx">
         <div style='left:38px;top:38px;animation-delay:0s'></div><div style='left:80px;top:38px;animation-delay:0.125s'></div><div style='left:122px;top:38px;animation-delay:0.25s'></div><div style='left:38px;top:80px;animation-delay:0.875s'></div><div style='left:122px;top:80px;animation-delay:0.375s'></div><div style='left:38px;top:122px;animation-delay:0.75s'></div><div style='left:80px;top:122px;animation-delay:0.625s'></div><div style='left:122px;top:122px;animation-delay:0.5s'></div>
         </div></div> -->
-        <div id="loading" class="loading"></div>
+    <div id="loading" class="loading"></div>
     <div class="stickyHeader">
 
         <div class="heading-form">
@@ -55,10 +55,10 @@
                                 <option value="" selected disabled>Choose an option</option>
 
                             </select>
-                            
-                            
+
+
                         </div>
-                        
+
                         <button class="continue-application" onclick="handleCategory()">
                             <div>
                                 <div class="pencil"></div>
@@ -76,7 +76,7 @@
                             Continue Application
                         </button>
 
-                       
+
                     </div>
 
                 </div>
@@ -153,7 +153,7 @@
                                                     <label for="gender">Gender</label>
                                                     <div class="form-flex">
                                                         <input type="radio" name="gender" value="male" id="male"
-                                                            required />
+                                                            checked />
                                                         <label for="male"><img src="images/icon-male.png"
                                                                 alt="Male"></label>
 
@@ -165,7 +165,7 @@
                                                 <div class="form-date">
                                                     <label for="dob" class="form-label">Date of birth</label>
                                                     <input type="date" name="dob" id="dob" placeholder="E.g. Kardashian"
-                                                        required />
+                                                    required />
                                                 </div>
                                             </div>
 
@@ -219,6 +219,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <!-- <div class="error-profile-upload" id="avatar-upload-error-message" style="display:block;">
+                                                    <span class="error1">
+                                                        <i class="error-log fa fa-exclamation-triangle"></i>
+                                                        Your Picture is required
+                                                    </span>
+
+                                                </div> -->
                                             </div>
                                             <div class="form-group">
                                                 <label for="pincode" class="form-label">Pincode</label>
@@ -352,18 +359,20 @@
     </div>
 
 
-    <div class="conf-modal center success" id="conf-modal" >
+    <div class="conf-modal center success" id="conf-modal">
         <div class="title-icon">
-          <img src="http://jimy.co/res/icon-success.jpg">
+            <img src="http://jimy.co/res/icon-success.jpg">
         </div>
-        <div class="title-text"><h1>Success!</h1></div>
+        <div class="title-text">
+            <h1>Success!</h1>
+        </div>
         <p>Thank you. We will get back to you soon.</p>
         <p class="link"><a href="http://wrapupeventz.com/">wrapupeventz.com</a></p>
         <!-- <div class="modal-footer">
           <div class="conf-but green" onClick="">Yes</div>
           <div class="conf-but" onClick="">No</div>    
         </div> -->
-      </div>
+    </div>
 
     <script>
 
@@ -653,9 +662,9 @@
                                 console.log("array", _arr)
                                 document.getElementById("collapse-22").innerHTML += _arr.join("")
                                 document.getElementById('fill-category').style.display = "none";
-                document.getElementById('fill-form').style.display = "block"
-                window.location.hash="collapseOne"
-                document.getElementById('loading').style.display = 'none'
+                                document.getElementById('fill-form').style.display = "block"
+                                window.location.hash = "collapseOne"
+                                document.getElementById('loading').style.display = 'none'
                                 resolve(data);
                             })
                             .catch((err) => {
@@ -764,7 +773,7 @@
                     }
                 })
             }
-            
+
             document.getElementById('loading').style.display = 'block'
             await axios.post(
                 `${Api}api/upload`,
@@ -795,10 +804,10 @@
                     document.getElementById('loading').style.display = 'none'
                     document.getElementById('fill-form').style.display = "none"
                     document.getElementById('conf-modal').style.display = 'block'
-                    
-                    setTimeout(()=>{
+
+                    setTimeout(() => {
                         window.location.replace("http://wrapupeventz.com/")
-                    },1500)
+                    }, 1500)
                     console.log('resOfPostAnswers', res)
                     // window.location.pathname="/opportunities"
                 })
@@ -821,7 +830,7 @@
         const handleCategory = () => {
             debugger
             let getCategory = document.getElementById('category-select').value
-            if(getCategory.length > 0){
+            if (getCategory.length > 0) {
                 localStorage.setItem('_categoryId', getCategory)
                 let _category = localStorage.getItem('_categoryId')
                 if (_category) {
@@ -829,12 +838,12 @@
                     _fetchQuestions()
                 }
             }
-            else{
-                
+            else {
+
                 var element = document.getElementById("category-select");
-                    element.classList.add("shake-vertical");
-                    
-                    setTimeout(function(){ element.classList.remove("shake-vertical"); }, 1000);
+                element.classList.add("shake-vertical");
+
+                setTimeout(function () { element.classList.remove("shake-vertical"); }, 1000);
                 // document.getElementById('category-select-error').style.display = 'block'
             }
         }
@@ -868,14 +877,21 @@
 
         const handleProfileSubmit = async () => {
             debugger
+            alert(document.getElementById('imageUpload').files.length === 0)
             var formData = new FormData();
             let data_body = {}
             data_body['key'] = 'profile'
             data_body['files'] = formData
+
             console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
             formData.append('profile-upload', document.getElementById('imageUpload').files[0])
             formData.append('file-name', document.getElementById('name').value)
-
+            debugger
+            if (document.getElementById('imageUpload').files.length === 0) {
+                alert('asljhfksdj')
+                document.getElementById('avatar-upload-error-message').style.display = 'block'
+                return false
+            }
             await axios.post(
                 `${Api}api/upload`,
                 formData, {
@@ -892,57 +908,56 @@
                 //         },
                 //         body: formData
                 //     })
-                .then(async response => 
-                {
+                .then(async response => {
 
-                    if(response && response.data && response.data.data && response.data.data.Location){
-//   alert('sdlhjflsdkfjl')
-let _obj = {}
-            //   "email","mobile","name","photo","dob","city_state","pincode"
+                    if (response && response.data && response.data.data && response.data.data.Location) {
+                        //   alert('sdlhjflsdkfjl')
+                        let _obj = {}
+                        //   "email","mobile","name","photo","dob","city_state","pincode"
 
-            var ele = document.getElementsByName('gender');
+                        var ele = document.getElementsByName('gender');
 
-            for (i = 0; i < ele.length; i++) {
-                if (ele[i].checked) _obj['gender'] = ele[i].value
-            }
-            _obj['photo'] = response.data.data.Location
-            await ["email", "mobile", "name", "dob", "city_state", "pincode"].map(async (val) => {
-                var _element = document.getElementById(val).value
-                if (_element && _element.length > 0) {
-                    debugger
-                    _obj[val] = await _element
-                }
-                else {
-                    debugger
-                    return false
-                }
-                console.log(val)
-            })
-            let body = { ..._obj }
-            await fetch(`${Api}api/updateprofile`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(body)
-            })
-                .then(response => response.json())
-                .then(res => {
-                    localStorage.setItem('profileId', res._val._id)
-                    window.location.hash = 'collapseTwo'
-                    // window.location.hash='collapseTwo'
-                })
-          
+                        for (i = 0; i < ele.length; i++) {
+                            if (ele[i].checked) _obj['gender'] = ele[i].value
+                        }
+                        _obj['photo'] = response.data.data.Location
+                        await ["email", "mobile", "name", "dob", "city_state", "pincode"].map(async (val) => {
+                            var _element = document.getElementById(val).value
+                            if (_element && _element.length > 0) {
+                                debugger
+                                _obj[val] = await _element
+                            }
+                            else {
+                                debugger
+                                return false
+                            }
+                            console.log(val)
+                        })
+                        let body = { ..._obj }
+                        await fetch(`${Api}api/updateprofile`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(body)
+                        })
+                            .then(response => response.json())
+                            .then(res => {
+                                localStorage.setItem('profileId', res._val._id)
+                                window.location.hash = 'collapseTwo'
+                                // window.location.hash='collapseTwo'
+                            })
+
                     }
-                    else{
+                    else {
                         alert('error occurred')
                     }
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
 
-          
+
 
         }
 

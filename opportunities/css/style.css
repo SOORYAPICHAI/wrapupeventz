@@ -83,7 +83,9 @@ input[type=radio] {
   -webkit-appearance: radio !important;
   -o-appearance: radio !important;
   -ms-appearance: radio !important; }
-
+  input[type=date]{
+    line-height: 20px;
+  }
 .clear {
   clear: both; }
   .stickyHeader{
@@ -136,7 +138,7 @@ background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
 
 
 .main {
-  padding: 70px 0; }
+  padding: 70px 10px; }
 .fill-form{
   display: none;
 }
@@ -208,7 +210,7 @@ background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
   text-align: center;
     color: red;
     padding-top: 10px;
-    display: none;
+    /* display: none; */
 }
 
 /*  */
