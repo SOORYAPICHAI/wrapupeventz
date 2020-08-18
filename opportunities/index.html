@@ -743,8 +743,7 @@
                     }
                     else if (val.type === 'file') {
                         let _temp_storage = {}
-                        _temp_storage['id'] = val.id
-                        _temp_storage['answer'] = _getFile(val.id)
+                        _getFile(val.id)
 
                         _api_obj['answers'].push(_temp_storage)
                     }
@@ -798,7 +797,17 @@
                 //         },
                 //         body: formData
                 //     })
-                .then(response => console.log(response.data.data.Location, 'response-profile'))
+                .then(response => 
+                {
+  
+                        response.data.data.map(val=>{
+                            let _temp_storage = {}
+                        _temp_storage['id'] = Object.keys(val).toString()
+                        _temp_storage['answer'] = val[Object.keys(val).toString()][0].Location
+                        _api_obj['answers'].push(_temp_storage)
+})
+                }
+                )
             await fetch(`${Api}api/postanswers`, {
                 method: 'POST',
                 headers: {

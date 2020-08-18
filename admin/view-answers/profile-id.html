@@ -71,7 +71,7 @@
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body:JSON.stringify({profile_id:'861f0402-b66c-4734-977e-8fd8ba0e587b'})
+                body:JSON.stringify({profile_id:window.location.search.split('?')[1]})
                 
             })
                 .then(response => response.json())
@@ -86,11 +86,13 @@
                         Promise.all(calls)
                             .then(async (data) => {
                                await data.map((val,i)=>{
+                                 debugger
                                    document.getElementById('content').innerHTML += '<div class="thing">'+
         '<span class="number">'+i+'</span>'+
         '<h2 class="question">'+val.question.question+'</h2>'+
         '<p>'+val.answer+'</p>'+
       '</div>' 
+      // val.question.field_json.type
                 //   _tableContents.push(_tempTR)
                 //   _tableContents = [..._tableContents,_tempTR]
                                 })

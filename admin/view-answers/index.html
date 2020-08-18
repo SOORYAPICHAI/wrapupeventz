@@ -60,7 +60,7 @@
                                await data.map(val=>{
                                    debugger
                                    let photo = val.photo  ? val.photo :"https://previews.123rf.com/images/pandavector/pandavector1901/pandavector190105281/126044187-isolated-object-of-avatar-and-dummy-symbol-collection-of-avatar-and-image-stock-symbol-for-web-.jpg"
-                                    let _tempTR = '<a = '+val._id+'><tr>'+'<td>'+'<img src='+photo+' alt="" />'+'</td>'+'<td>'+val.name  +'</td>'+'<td>'+val.email  +'</td>'+'<td>'+val.mobile +'</td>'+'<td>'+ val.gender+'</td>'+'</tr></a>'
+                                    let _tempTR = '<tr>'+'<td>'+'<img src='+photo+' alt="" />'+'</td>'+'<td>'+'<a = href=profile-id.html?'+val._id+'>'+val.name+'</a>'+'</td>'+'<td>'+val.email  +'</td>'+'<td>'+val.mobile +'</td>'+'<td>'+ val.gender+'</td>'+'</tr>'
                 //   _tableContents.push(_tempTR)
                   _tableContents = [..._tableContents,_tempTR]
                                 })
