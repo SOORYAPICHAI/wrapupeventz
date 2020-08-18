@@ -120,7 +120,7 @@
             <div class="clear"></div>
             <div class="next">
                 <button type="button" class="btn btn-primary" onclick="handleCategory()">Next</button>
-                <button type="button" class="btn btn-primary" onclick="next()">Jump</button>
+                <!-- <button type="button" class="btn btn-primary" onclick="next()">Jump</button> -->
             </div>
         </div>
     </div>
@@ -136,9 +136,11 @@
 
     </div>
     <div id="build-wrap"></div>
-    <div id="buttons-form" class="new-action-buttons"><button id="show-data">Show Data</button><button id="trash">Trash
+    <div id="buttons-form" class="new-action-buttons">
+        <!-- <button id="show-data">Show Data</button>
+        <button id="trash">Trash
             all
-            fields</button>
+            fields</button> -->
         <button id="saveData">save</button>
     </div>
 
@@ -190,8 +192,8 @@
     <script>
         jQuery(function ($) {
             var fbEditor = document.getElementById('build-wrap'),
-                trash = document.getElementById('trash'),
-                showData = document.getElementById('show-data'),
+                // trash = document.getElementById('trash'),
+                // showData = document.getElementById('show-data'),
                 saveData = document.getElementById("saveData"),
                 fbOptions = {
                     showActionButtons: false,
@@ -203,7 +205,8 @@
                         'hidden',
                         'paragraph',
                         'starRating',
-                        'checkbox-group'
+                        'checkbox-group',
+                        'select'
                     ],
                     disabledAttrs: ["className", "inline", "toggle", "access", "name", "other", "helpetext"],
                     disabledSubtypes: {
@@ -215,15 +218,22 @@
                 },
                 formBuilder = $(fbEditor).formBuilder(fbOptions);
 
-            showData.onclick = function () {
-                formBuilder.actions.showData();
-            };
-            trash.onclick = function () {
-                formBuilder.actions.clearFields()
-            };
+            // showData.onclick = function () {
+            //     formBuilder.actions.showData();
+            // };
+            // trash.onclick = function () {
+            //     formBuilder.actions.clearFields()
+            // };
             saveData.onclick = function () {
                 console.log("external save clicked");
                 const result = formBuilder.actions.save();
+                debugger
+                if(JSON.parse(result).length === 0){
+                    console.log('resultresultresultresultresult',result)    
+                    alert('No questions created')
+                    return false
+                }
+                
                 let _localStorage = JSON.parse(localStorage.getItem('category'))
                 let body = {
                     category_id: _localStorage._id,
@@ -370,8 +380,8 @@
         document.getElementById('containerCategory').style.display = "none"
         document.getElementById('build-wrap').style.display = "block"
         document.body.style.background = "whitesmoke"
-        document.getElementById('show-data').style.display = "block"
-        document.getElementById('trash').style.display = "block"
+        // document.getElementById('show-data').style.display = "block"
+        // document.getElementById('trash').style.display = "block"
         document.getElementById('saveData').style.display = "block"
     }
 
