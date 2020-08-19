@@ -693,6 +693,7 @@
             console.log(ids, "idsidsids");
 
             var formData = new FormData();
+            var _file = false
             let profileId = localStorage.getItem('profileId')
             const _getValue = (id) => {
                 let _document = document.getElementById(id).value
@@ -744,7 +745,7 @@
                     else if (val.type === 'file') {
                         let _temp_storage = {}
                         _getFile(val.id)
-
+                        _file  = true
                         _api_obj['answers'].push(_temp_storage)
                     }
                     else if (val.type === 'number') {
@@ -781,6 +782,8 @@
             }
 
             document.getElementById('loading').style.display = 'block'
+            debugger
+           if(_file){
             await axios.post(
                 `${Api}api/upload`,
                 formData, {
@@ -808,6 +811,7 @@
 })
                 }
                 )
+           }
             await fetch(`${Api}api/postanswers`, {
                 method: 'POST',
                 headers: {
@@ -904,7 +908,6 @@
             formData.append('file-name', document.getElementById('name').value)
             debugger
             if (document.getElementById('imageUpload').files.length === 0) {
-                alert('asljhfksdj')
                 document.getElementById('avatar-upload-error-message').style.display = 'block'
                 return false
             }
