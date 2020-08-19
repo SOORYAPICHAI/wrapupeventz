@@ -747,7 +747,7 @@
                         let _temp_storage = {}
                         _getFile(val.id)
                         _file  = true
-                        _api_obj['answers'].push(_temp_storage)
+                        // _api_obj['answers'].push(_temp_storage)
                     }
                     else if (val.type === 'number') {
                         let _temp_storage = {}
@@ -907,6 +907,7 @@
             console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
             formData.append('profile-upload', document.getElementById('imageUpload').files[0])
             formData.append('file-name', document.getElementById('name').value)
+                                            document.getElementById('loading').style.display = 'none'
             debugger
             if (document.getElementById('imageUpload').files.length === 0) {
                 document.getElementById('avatar-upload-error-message').style.display = 'block'
@@ -916,6 +917,7 @@
             //     document.getElementById('avatar-select-error-message').style.display = 'block'
             //     return false
             // }
+            document.getElementById('loading').style.display = 'block'
             await axios.post(
                 `${Api}api/upload`,
                 formData, {
@@ -969,6 +971,7 @@
                             .then(res => {
                                 localStorage.setItem('profileId', res._val._id)
                                 window.location.hash = 'collapseTwo'
+                                document.getElementById('loading').style.display = 'none'
                                 // window.location.hash='collapseTwo'
                             })
 
