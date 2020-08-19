@@ -451,6 +451,14 @@
         }
 
         // SUBMIT CATEGORIES
+        const handleChecked = (i) =>{
+                                    if(i===0){
+                                        return 'checked'
+                                    }
+                                    else{
+                                        return null
+                                    }
+                                }
 
         let ids = []
         // TO FETCH QUESTIONS
@@ -475,6 +483,7 @@
                         })
                         Promise.all(calls)
                             .then(async (data) => {
+                                
                                 await data.map((val, i) => {
                                     let obj = {}
                                     debugger
@@ -554,7 +563,8 @@
                                             '<label for=' + val._id + '> ' + val.field_json.label + '</label>' +
                                             '<div class="form-flex">' +
                                             val.field_json.values.map((subOptions, i) => {
-                                                return '<input type=radio checked  name=' + val._id + ' value=' + subOptions.value + ' id=' + subOptions.value + ' />' +
+                                                debugger
+                                                return '<input type=radio ' + handleChecked(i) + ' name=' + val._id + ' value=' + subOptions.value + ' id=' + subOptions.value + ' />' +
                                                     '<label for=' + subOptions.value + ' style="width:80%;margin:5px">' + subOptions.label + '</label>'
                                             }).join("")
                                             +
