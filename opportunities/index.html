@@ -6,7 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="colorlib.com">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form</title>
+    <title>Join With Us</title>
+
+        <!-- OG TAG -->
+        <meta property="og:title" content="Join with Us" />
+        <meta property="og:type" content="site" />
+        <meta property="og:url" content="https://wrapupeventz.com/" />
+        <meta property="og:image"
+            content="https://instagram.fmaa11-1.fna.fbcdn.net/v/t51.2885-19/s320x320/81823127_179744453093149_37583862942924800_n.jpg?_nc_ht=instagram.fmaa11-1.fna.fbcdn.net&_nc_ohc=sVr39BYJagYAX_QSHme&oh=e0c66c3a84f3bf61c83b8dc4ac22a339&oe=5F661B98" />
+        <meta name="description" content="Wrap up eventz is a Event management company based out of chennai.">
+        <meta name="author" content="wrapupeventz">
+    
 
     <!-- Font Icon -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -34,7 +44,7 @@
 
         <div class="heading-form">
             <a href="/" style="text-decoration: none;color: white;">Wrap Up Eventz</a>
-            
+
         </div>
         <label class="heading-form-label">Please fill out this field</label>
     </div>
@@ -166,7 +176,7 @@
                                                 <div class="form-date">
                                                     <label for="dob" class="form-label">Date of birth</label>
                                                     <input type="date" name="dob" id="dob" placeholder="E.g. Kardashian"
-                                                    required />
+                                                        required />
                                                 </div>
                                             </div>
 
@@ -201,11 +211,11 @@
 
                                         <div class="form-row">
                                             <!-- <div class="form-group" id=city_state> -->
-                                                <!-- <label for="city_state" class="form-label">City</label>
+                                            <!-- <label for="city_state" class="form-label">City</label>
                                                 <input type="text" name="city_state" id="city_state"
                                                     placeholder="Eg. Ha Noi" /> -->
-                                               
-                                                <!-- <div class="error-profile-upload" id="avatar-upload-error-message" style="display:block;">
+
+                                            <!-- <div class="error-profile-upload" id="avatar-upload-error-message" style="display:block;">
                                                     <span class="error1">
                                                         <i class="error-log fa fa-exclamation-triangle"></i>
                                                         Your Picture is required
@@ -402,7 +412,7 @@
             // $('#category-select').append(`<option value="${'optionValue'}"> 
             //                                    ${'optionText'} 
             //                               </option>`); 
-            
+
             let _selectValue = document.getElementById('category-select')
 
             let body = { view_categories: true }
@@ -543,7 +553,7 @@
                                             '<div class="form-radio" style="width:100%">' +
                                             '<label for=' + val._id + '> ' + val.field_json.label + '</label>' +
                                             '<div class="form-flex">' +
-                                            val.field_json.values.map((subOptions,i) => {
+                                            val.field_json.values.map((subOptions, i) => {
                                                 return '<input type=radio checked  name=' + val._id + ' value=' + subOptions.value + ' id=' + subOptions.value + ' />' +
                                                     '<label for=' + subOptions.value + ' style="width:80%;margin:5px">' + subOptions.label + '</label>'
                                             }).join("")
@@ -746,7 +756,7 @@
                     else if (val.type === 'file') {
                         let _temp_storage = {}
                         _getFile(val.id)
-                        _file  = true
+                        _file = true
                         // _api_obj['answers'].push(_temp_storage)
                     }
                     else if (val.type === 'number') {
@@ -784,35 +794,34 @@
 
             document.getElementById('loading').style.display = 'block'
             debugger
-           if(_file){
-            await axios.post(
-                `${Api}api/upload`,
-                formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    //   Authorization: localStorage.auth_token
-                }
-            })
-                // await fetch(`${Api}api/upload`, {
-                //         method: 'POST',
-                //         headers: {
-                //             // 'Content-Type': 'application/json;charset=utf-8',
-                //             'Content-Type': 'multipart/form-data'
-                //         },
-                //         body: formData
-                //     })
-                .then(response => 
-                {
-  
-                        response.data.data.map(val=>{
+            if (_file) {
+                await axios.post(
+                    `${Api}api/upload`,
+                    formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        //   Authorization: localStorage.auth_token
+                    }
+                })
+                    // await fetch(`${Api}api/upload`, {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             // 'Content-Type': 'application/json;charset=utf-8',
+                    //             'Content-Type': 'multipart/form-data'
+                    //         },
+                    //         body: formData
+                    //     })
+                    .then(response => {
+
+                        response.data.data.map(val => {
                             let _temp_storage = {}
-                        _temp_storage['id'] = Object.keys(val).toString()
-                        _temp_storage['answer'] = val[Object.keys(val).toString()][0].Location
-                        _api_obj['answers'].push(_temp_storage)
-})
-                }
-                )
-           }
+                            _temp_storage['id'] = Object.keys(val).toString()
+                            _temp_storage['answer'] = val[Object.keys(val).toString()][0].Location
+                            _api_obj['answers'].push(_temp_storage)
+                        })
+                    }
+                    )
+            }
             await fetch(`${Api}api/postanswers`, {
                 method: 'POST',
                 headers: {
@@ -856,7 +865,7 @@
                 let _category = localStorage.getItem('_categoryId')
                 if (_category) {
                     document.getElementById('loading').style.display = 'block'
-                    
+
                     _fetchQuestions()
                 }
             }
@@ -907,7 +916,7 @@
             console.log('vada_yen_machi', document.getElementById('imageUpload').files[0])
             formData.append('profile-upload', document.getElementById('imageUpload').files[0])
             formData.append('file-name', document.getElementById('name').value)
-                                            document.getElementById('loading').style.display = 'none'
+            document.getElementById('loading').style.display = 'none'
             debugger
             if (document.getElementById('imageUpload').files.length === 0) {
                 document.getElementById('avatar-upload-error-message').style.display = 'block'
