@@ -226,10 +226,10 @@
             // };
             saveData.onclick = function () {
                 console.log("external save clicked");
-                const result = formBuilder.actions.save();
+                const result = formBuilder.actions.getData();
+                
                 debugger
-                if(JSON.parse(result).length === 0){
-                    console.log('resultresultresultresultresult',result)    
+                if(result.length === 0){
                     alert('No questions created')
                     return false
                 }
@@ -237,7 +237,7 @@
                 let _localStorage = JSON.parse(localStorage.getItem('category'))
                 let body = {
                     category_id: _localStorage._id,
-                    questions: JSON.parse(result)
+                    questions: result
                 }
                 fetch(`${Api}api/createquestionsanswers`, {
                     method: 'POST',

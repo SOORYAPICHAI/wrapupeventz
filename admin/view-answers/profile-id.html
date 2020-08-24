@@ -87,11 +87,28 @@
                             .then(async (data) => {
                                await data.map((val,i)=>{
                                  debugger
-                                   document.getElementById('content').innerHTML += '<div class="thing">'+
+                                 if(val.question.field_json.type === "file"){
+                                  document.getElementById('content').innerHTML += '<div class="thing">'+
+        '<span class="number">'+i+'</span>'+
+        '<h2 class="question">'+val.question.question+'</h2>'+
+        '<p><a href='+val.answer+' target="_blank" style="cursor:pointer">'+val.answer+'</a></p>'+
+      '</div>' 
+                                 }
+                                 else if(val.question.field_json.type === "radio-group"){
+                                  document.getElementById('content').innerHTML += '<div class="thing">'+
+        '<span class="number">'+i+'</span>'+
+        '<h2 class="question">'+val.question.question+'</h2>'+
+        '<p>'+val.answer.split('__')[0]+'</p>'+
+      '</div>' 
+                                 }
+                                 else{
+                                  document.getElementById('content').innerHTML += '<div class="thing">'+
         '<span class="number">'+i+'</span>'+
         '<h2 class="question">'+val.question.question+'</h2>'+
         '<p>'+val.answer+'</p>'+
       '</div>' 
+                                 }
+                                   
       // val.question.field_json.type
                 //   _tableContents.push(_tempTR)
                 //   _tableContents = [..._tableContents,_tempTR]
