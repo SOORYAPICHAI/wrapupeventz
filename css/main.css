@@ -1478,8 +1478,8 @@ input::-moz-focus-inner {
 }
 
 .header-logo img {
-  width: 140px;
-  height: 23px;
+  width: 200px;
+  height: 100%;
 }
 
 
@@ -1553,16 +1553,18 @@ input::-moz-focus-inner {
   }
 
   .header-logo img {
-    width: 125px;
-    height: 20px;
+    /* width: 125px;
+    height: 20px; */
+    display: none;
   }
 
 }
 
 @media screen and (max-width:600px) {
   .header-logo img {
-    width: 120px;
-    height: 19px;
+    /* width: 120px;
+    height: 19px; */
+    display: none;
   }
 
 }
