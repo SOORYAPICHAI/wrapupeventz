@@ -1,129 +1,162 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../../config.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.thing {
-    padding: 1rem;
-    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08);
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 0.5rem solid #00ff99;
-    transition: border-left 300ms ease-in-out, padding-left 300ms ease-in-out;
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 200px);
-    margin: auto;
-    margin-bottom: 20px;
-}
 
-/* .thing:hover {
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../../config.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <style>
+    .thing {
+      padding: 1rem;
+      box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 0.5rem solid #00ff99;
+      transition: border-left 300ms ease-in-out, padding-left 300ms ease-in-out;
+      display: flex;
+      flex-direction: column;
+      width: calc(100% - 200px);
+      margin: auto;
+      margin-bottom: 20px;
+    }
+
+    /* .thing:hover {
   padding-left: 0.5rem;
   border-left: 0.5rem solid #00ff99;
 } */
 
-.thing > :first-child {
-  margin-top: 0;
-}
-
-.thing > :last-child {
-  margin-bottom: 0;
-}
-
-.heading {
-  color: #fff;
-}
-.question{
-    font-size: 1rem;
-}
-.number{
-    background-color: #fff;
-  border: 2px solid #e25c00;
-  width: fit-content;
-  padding: 5px;
-  color: #e25c00;
-}
-@media screen and (max-width: 600px) {
-    .thing {
-        width: calc(100% - 50px);
+    .thing> :first-child {
+      margin-top: 0;
     }
-}
-</style>
+
+    .thing> :last-child {
+      margin-bottom: 0;
+    }
+
+    .heading {
+      color: #fff;
+    }
+
+    .question {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .number {
+      background-color: #fff;
+      border: 2px solid #e25c00;
+      width: fit-content;
+      padding: 5px;
+      color: #e25c00;
+    }
+
+    @media screen and (max-width: 600px) {
+      .thing {
+        width: calc(100% - 50px);
+      }
+    }
+  </style>
 </head>
+
 <body onload="fetchAllProfiles()">
-    <h1>Answer</h1>
+  <h1 style="text-align: center;margin-bottom: 20px;">Answers</h1>
 
-    <div id="content">
+  <div id="content">
 
-    </div>
-      
+  </div>
 
-      <script>
-            const fetchAllProfiles = async() =>{
-            await fetch(`${Api}api/fetchanswers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body:JSON.stringify({profile_id:window.location.search.split('?')[1]})
-                
+
+  <script>
+    const fetchAllProfiles = async () => {
+      await fetch(`${Api}api/fetchanswers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({ profile_id: window.location.search.split('?')[1] })
+
+      })
+        .then(response => response.json())
+        .then(async commits => {
+
+
+          console.log(commits, "commits")
+          return new Promise(async (resolve, reject) => {
+            const calls = commits.map((val) => {
+              return val
             })
-                .then(response => response.json())
-                .then(async commits => {
-        
+            Promise.all(calls)
+              .then(async (data) => {
+                await data.map((val, i) => {
+                  debugger
+                  if (val.question.field_json.type === "file") {
+                    // val.answer.split(',').map(val=>)
+                    document.getElementById('content').innerHTML += '<div class="thing">' +
+                      '<span class="number">' + i + '</span>' +
+                      '<h2 class="question" style="margin-bottom:40px">' + val.question.question + '</h2>' +
 
-                    console.log(commits, "commits")
-                    return new Promise(async (resolve, reject) => {
-                        const calls = commits.map((val) => {
-                            return val
-                        })
-                        Promise.all(calls)
-                            .then(async (data) => {
-                               await data.map((val,i)=>{
-                                 debugger
-                                 if(val.question.field_json.type === "file"){
-                                  document.getElementById('content').innerHTML += '<div class="thing">'+
-        '<span class="number">'+i+'</span>'+
-        '<h2 class="question">'+val.question.question+'</h2>'+
-        '<p><a href='+val.answer+' target="_blank" style="cursor:pointer">'+val.answer+'</a></p>'+
-      '</div>' 
-                                 }
-                                 else if(val.question.field_json.type === "radio-group"){
-                                  document.getElementById('content').innerHTML += '<div class="thing">'+
-        '<span class="number">'+i+'</span>'+
-        '<h2 class="question">'+val.question.question+'</h2>'+
-        '<p>'+val.answer.split('__')[0]+'</p>'+
-      '</div>' 
-                                 }
-                                 else{
-                                  document.getElementById('content').innerHTML += '<div class="thing">'+
-        '<span class="number">'+i+'</span>'+
-        '<h2 class="question">'+val.question.question+'</h2>'+
-        '<p>'+val.answer+'</p>'+
-      '</div>' 
-                                 }
-                                   
-      // val.question.field_json.type
-                //   _tableContents.push(_tempTR)
-                //   _tableContents = [..._tableContents,_tempTR]
-                                })
-                                //  _tableContents.join("")
-                                resolve(data);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    });
-        console.log('commits,commits,commits,commits,commits', commits)
-                });
+                      '<div class="container">' +
+                      '<div class="row">' +
+                      val.answer.split(',').map(images =>
+                        '<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-5">' +
+                        '<a href=' + images + ' target="_blank"><img src="' + images + '" width="100%" height="300px"/></a>' +
+                        '</div>'
+                      ).join('') +
+                      '</div>' +
+                      '</div>' +
 
-        }
-      </script>
+                      // '<p><img src="'+images+'" width="100%" height="250px"/></p>'
+
+
+
+                      '</div>'
+                  }
+                  else if (val.question.field_json.type === "radio-group") {
+                    document.getElementById('content').innerHTML += '<div class="thing">' +
+                      '<span class="number">' + i + '</span>' +
+                      '<h2 class="question">' + val.question.question + '</h2>' +
+                      '<p>' + val.answer.split('__')[0] + '</p>' +
+                      '</div>'
+                  }
+                  else {
+                    document.getElementById('content').innerHTML += '<div class="thing">' +
+                      '<span class="number">' + i + '</span>' +
+                      '<h2 class="question">' + val.question.question + '</h2>' +
+                      '<p>' + val.answer + '</p>' +
+                      '</div>'
+                  }
+
+                  // val.question.field_json.type
+                  //   _tableContents.push(_tempTR)
+                  //   _tableContents = [..._tableContents,_tempTR]
+                })
+                //  _tableContents.join("")
+                resolve(data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          });
+          console.log('commits,commits,commits,commits,commits', commits)
+        });
+
+    }
+  </script>
 </body>
+
 </html>
