@@ -1294,6 +1294,10 @@ body .twitter svg {
   display: none;
 }
 
+#err-modal{
+  display: none;
+}
+
 body {
   background-color: #78909c;
   font-family: 'Roboto';

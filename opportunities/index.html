@@ -122,7 +122,7 @@
                                             <div class="avatar-upload" id="avatar-upload">
                                                 <div class="avatar-edit">
                                                     <input type='file' id="imageUpload" name="file-upload"
-                                                        accept=".png, .jpg, .jpeg" onchange="readURL(this);" />
+                                                        accept="image/*" onchange="readURL(this);" />
                                                     <label class="profilelabel" for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
@@ -365,15 +365,17 @@
             <img src="http://jimy.co/res/icon-success.jpg">
         </div>
         <div class="title-text">
-            <h1>Success!</h1>
+            <h1 id="replaceText-1">Success!</h1>
         </div>
-        <p>Thank you. We will get back to you soon.</p>
+        <p id="replaceText-2">Thank you. We will get back to you soon.</p>
         <p class="link"><a href="http://wrapupeventz.com/">wrapupeventz.com</a></p>
         <!-- <div class="modal-footer">
           <div class="conf-but green" onClick="">Yes</div>
           <div class="conf-but" onClick="">No</div>    
         </div> -->
     </div>
+
+    
 
     <script>
 
@@ -801,7 +803,7 @@
                     }
                 })
             }
-
+            formData.append('answers', JSON.stringify(_api_obj));
             document.getElementById('loading').style.display = 'block'
             debugger
             if (_file) {
@@ -813,6 +815,13 @@
                         //   Authorization: localStorage.auth_token
                     }
                 })
+                document.getElementById('loading').style.display = 'none'
+                    document.getElementById('fill-form').style.display = "none"
+                    document.getElementById('conf-modal').style.display = 'block'
+
+                    setTimeout(() => {
+                        window.location.replace("http://wrapupeventz.com/")
+                    }, 1500)
                     // await fetch(`${Api}api/upload`, {
                     //         method: 'POST',
                     //         headers: {
@@ -821,17 +830,23 @@
                     //         },
                     //         body: formData
                     //     })
-                    .then(response => {
-                        debugger
-                        
-response.data.data.map(val=>{
-    var _obj = {}
-var keys= Object.keys(val)[0] 
-var values = Object.values(val)[0].map(val=>{return val.Location})
-_obj['id'] = keys
-_obj['answer'] = values.toString()
-_api_obj['answers'].push(_obj)
-})
+                    // .then(response => {
+                        // debugger
+
+
+                        // NEW JSON
+
+                        // response.data.data.map(val => {
+
+                        //     var _obj = {}
+                        //     var keys = Object.keys(val)[0]
+                        //     var values = Object.values(val)[0].map(val => { return val.Location })
+                        //     _obj['id'] = keys
+                        //     _obj['answer'] = values.toString()
+                        //     _api_obj['answers'].push(_obj)
+                        // })
+// -----------------------------------------------------------------------------------
+                    // console.log('resOfPostAnswers', res)
                         // response.data.data.map(val => {
                         //     let _temp_storage = {}
                         //     _temp_storage['id'] = Object.keys(val).toString()
@@ -845,28 +860,38 @@ _api_obj['answers'].push(_obj)
                         //     _temp_storage['answer'] = _arr
                         //     _api_obj['answers'].push(_temp_storage)
                         // })
-                    }
-                    )
-            }
-            await fetch(`${Api}api/postanswers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(_api_obj)
-            })
-                .then(response => response.json())
-                .then(res => {
-                    document.getElementById('loading').style.display = 'none'
-                    document.getElementById('fill-form').style.display = "none"
-                    document.getElementById('conf-modal').style.display = 'block'
+                    // }
+                    // ).catch((err)=>{
+                    //     document.getElementById('loading').style.display = 'none'
+                    // document.getElementById('fill-form').style.display = "none"
+                    // document.getElementById('replaceText-1').innerHTML="Failed !"
+                    // document.getElementById('replaceText-2').innerHTML="Sorry for the inconvenience. We will get back to you soon."
+                    // document.getElementById('conf-modal').style.display = 'block'
 
-                    setTimeout(() => {
-                        window.location.replace("http://wrapupeventz.com/")
-                    }, 1500)
-                    console.log('resOfPostAnswers', res)
-                    // window.location.pathname="/opportunities"
-                })
+                    // setTimeout(() => {
+                    //     window.location.replace("http://wrapupeventz.com/")
+                    // }, 1500)
+                    // })
+            }
+            // await fetch(`${Api}api/postanswers`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json;charset=utf-8'
+            //     },
+            //     body: JSON.stringify(_api_obj)
+            // })
+            //     .then(response => response.json())
+            //     .then(res => {
+            //         document.getElementById('loading').style.display = 'none'
+            //         document.getElementById('fill-form').style.display = "none"
+            //         document.getElementById('conf-modal').style.display = 'block'
+
+            //         setTimeout(() => {
+            //             window.location.replace("http://wrapupeventz.com/")
+            //         }, 1500)
+            //         console.log('resOfPostAnswers', res)
+            //         // window.location.pathname="/opportunities"
+            //     })
             console.log(_api_obj, "_api_obj_api_obj_api_obj")
             return false
         }
