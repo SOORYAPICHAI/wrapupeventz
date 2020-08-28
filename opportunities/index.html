@@ -564,8 +564,8 @@
                                             '<div class="form-flex">' +
                                             val.field_json.values.map((subOptions, i) => {
                                                 debugger
-                                                return '<input type=radio   '+ handleChecked(i)  + ' name=' + val._id + ' value=' + subOptions.label.trim().concat(val._id) + ' id=' + subOptions.label.trim().concat(val._id) + ' />' +
-                                                    '<label for=' + subOptions.label.trim().concat(val._id) + ' style="width:80%;margin:5px">' + subOptions.label + '</label>'
+                                                return '<input type=radio   ' + handleChecked(i) + ' name=' + val._id + ' value=' + subOptions.label.trim().concat('__').concat(val._id) + ' id=' + subOptions.label.trim().concat('__').concat(val._id) + ' />' +
+                                                    '<label for=' + subOptions.label.trim().concat('__').concat(val._id) + ' style="width:80%;margin:5px">' + subOptions.label + '</label>'
                                             }).join("")
                                             +
                                             // '<input type='+val.field_json.type+' name=' + val._id + ' value="female" id="f" />' +
@@ -822,13 +822,29 @@
                     //         body: formData
                     //     })
                     .then(response => {
-
-                        response.data.data.map(val => {
-                            let _temp_storage = {}
-                            _temp_storage['id'] = Object.keys(val).toString()
-                            _temp_storage['answer'] = val[Object.keys(val).toString()][0].Location
-                            _api_obj['answers'].push(_temp_storage)
-                        })
+                        debugger
+                        
+response.data.data.map(val=>{
+    var _obj = {}
+var keys= Object.keys(val)[0] 
+var values = Object.values(val)[0].map(val=>{return val.Location})
+_obj['id'] = keys
+_obj['answer'] = values.toString()
+_api_obj['answers'].push(_obj)
+})
+                        // response.data.data.map(val => {
+                        //     let _temp_storage = {}
+                        //     _temp_storage['id'] = Object.keys(val).toString()
+                        //     debugger
+                        //     let _length = val[Object.keys(val).toString()].length
+                        //     let _arr = []
+                        //     for (var i = 0; i < _length; i++) {
+                        //         let index = i
+                        //         _arr.push([Object.keys(val).toString()][index].Location)
+                        //     }
+                        //     _temp_storage['answer'] = _arr
+                        //     _api_obj['answers'].push(_temp_storage)
+                        // })
                     }
                     )
             }
