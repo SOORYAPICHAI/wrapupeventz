@@ -1,3 +1,26 @@
+/*
+ *  STYLE 3
+ */
+
+ #table::-webkit-scrollbar-track
+ {
+	 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	 background-color: #F5F5F5;
+ }
+ 
+ #table::-webkit-scrollbar
+ {
+	 width: 6px;
+	 background-color: #F5F5F5;
+ }
+ 
+ #table::-webkit-scrollbar-thumb
+ {
+	 background-color: #000000;
+ }
+ .totalCandidates{
+	float: right;
+	}
 body {
 	 background-color: #91ced4;
 }
@@ -9,8 +32,10 @@ body {
 	 color: white;
 	 font-size: 1.5em;
 	 padding: 1rem;
-	 text-align: center;
+	 
 	 text-transform: uppercase;
+	 position: sticky;
+	 top:0px;
 }
  img {
 	 border-radius: 50%;
@@ -23,8 +48,9 @@ body {
 	 box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 	 max-width: calc(100% - 2em);
 	 margin: 1em auto;
-	 overflow: hidden;
-	 width: 800px;
+	 overflow: auto;
+	 /* width: 800px; */
+	 height: 90vh;
 }
  table {
 	 width: 100%;
@@ -40,7 +66,7 @@ body {
  table td:last-child {
 	 font-size: 0.95em;
 	 line-height: 1.4;
-	 text-align: center;
+	 /* text-align: center; */
 }
  table th {
 	 background-color: #daeff1;
@@ -56,6 +82,7 @@ body {
 	 table, tr, td {
 		 display: block;
 	}
+	
 	 td:first-child {
 		 position: absolute;
 		 top: 50%;
@@ -86,14 +113,32 @@ body {
 		 content: 'Phone:';
 	}
 	 td:nth-child(5):before {
-		 content: 'Comments:';
+		 content: 'Gender:';
 	}
+	td:nth-child(6):before {
+		content: 'DOB:';
+   }
+   td:nth-child(7):before {
+	content: 'City/State:';
+}
+td:nth-child(8):before {
+	content: 'Pincode:';
+}
+td:nth-child(9):before {
+	content: 'Applied On:';
+}
 	 tr {
 		 padding: 10px 0;
 		 position: relative;
 	}
 	 tr:first-child {
 		 display: none;
+	}
+	.totalCandidates{
+	font-size: 0.9rem;
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	}
 }
  @media screen and (max-width: 500px) {

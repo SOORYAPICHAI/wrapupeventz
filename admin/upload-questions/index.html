@@ -227,13 +227,13 @@
             saveData.onclick = function () {
                 console.log("external save clicked");
                 const result = formBuilder.actions.getData();
-                
+
                 debugger
-                if(result.length === 0){
+                if (result.length === 0) {
                     alert('No questions created')
                     return false
                 }
-                
+
                 let _localStorage = JSON.parse(localStorage.getItem('category'))
                 let body = {
                     category_id: _localStorage._id,
