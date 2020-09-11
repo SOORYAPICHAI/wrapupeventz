@@ -133,6 +133,17 @@
                       '<p>' + val.answer.split('__')[0] + '</p>' +
                       '</div>'
                   }
+                  else if (val.question.field_json.type === "checkbox-group") {
+                    document.getElementById('content').innerHTML += '<div class="thing">' +
+                      '<span class="number">' + i + '</span>' +
+                      '<h2 class="question">' + val.question.question + '</h2>' +
+                      '<ul>'+
+                      JSON.parse(val.answer).map(val=> '<li>' + val.split('__')[0] + '</li>').join("")
+                      +
+                      '</ul>' 
+                      +
+                      '</div>'
+                  }
                   else {
                     document.getElementById('content').innerHTML += '<div class="thing">' +
                       '<span class="number">' + i + '</span>' +

@@ -36,6 +36,7 @@
 </head>
 
 <body onload="_funcFetchCategories()" id="onloadpage">
+    <!-- style="overflow-x: hidden;" -->
     <!-- <div id="loading" class="loadingio-spinner-blocks-qvuqcsnher"><div class="ldio-me3z71t5bx">
         <div style='left:38px;top:38px;animation-delay:0s'></div><div style='left:80px;top:38px;animation-delay:0.125s'></div><div style='left:122px;top:38px;animation-delay:0.25s'></div><div style='left:38px;top:80px;animation-delay:0.875s'></div><div style='left:122px;top:80px;animation-delay:0.375s'></div><div style='left:38px;top:122px;animation-delay:0.75s'></div><div style='left:80px;top:122px;animation-delay:0.625s'></div><div style='left:122px;top:122px;animation-delay:0.5s'></div>
         </div></div> -->
@@ -232,7 +233,33 @@
                                                 <label for="pincode" class="form-label">Pincode</label>
                                                 <input type="number" name="pincode" id="pincode" required />
                                             </div>
+                                            <!-- <div class="form-group">
+                                                <label for="multi" class="form-label">Pincode</label>
+                                                <ul class="ks-cboxtags" id="multi">
+                                                    <li><input hidden type="checkbox" id="checkboxOne" value="Rainbow Dash"><label for="checkboxOne">Rainbow Dash</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxTwo" value="Cotton Candy" checked><label for="checkboxTwo">Cotton Candy</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxThree" value="Rarity" checked><label for="checkboxThree">Rarity</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxFour" value="Moondancer"><label for="checkboxFour">Moondancer</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxFive" value="Surprise"><label for="checkboxFive">Surprise</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxSix" value="Twilight Sparkle" checked><label for="checkboxSix">Twilight
+                                                                    Sparkle</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxSeven" value="Fluttershy"><label for="checkboxSeven">Fluttershy</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxEight" value="Derpy Hooves"><label for="checkboxEight">Derpy Hooves</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxNine" value="Princess Celestia"><label for="checkboxNine">Princess
+                                                                    Celestia</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxTen" value="Gusty"><label for="checkboxTen">Gusty</label></li>
+                                                    <li class="ks-selected"><input type="checkbox" hidden id="checkboxEleven" value="Discord"><label for="checkboxEleven">Discord</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxTwelve" value="Clover"><label for="checkboxTwelve">Clover</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxThirteen" value="Baby Moondancer"><label for="checkboxThirteen">Baby
+                                                                    Moondancer</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxFourteen" value="Medley"><label for="checkboxFourteen">Medley</label></li>
+                                                    <li><input type="checkbox" hidden id="checkboxFifteen" value="Firefly"><label for="checkboxFifteen">Firefly</label></li>
+                                                  </ul>
+                                                
+                                            </div> -->
+
                                         </div>
+                                    
                                     </fieldset>
 
                                     <div class="form-submit">
@@ -571,7 +598,6 @@
                                             '<label for=' + val._id + '> ' + val.field_json.label + '</label>' +
                                             '<div class="form-flex">' +
                                             val.field_json.values.map((subOptions, i) => {
-                                                debugger
                                                 return '<input type=radio   ' + handleChecked(i) + ' name=' + val._id + ' value=' + subOptions.label.trim().concat('__').concat(val._id) + ' id=' + subOptions.label.trim().concat('__').concat(val._id) + ' />' +
                                                     '<label for=' + subOptions.label.trim().concat('__').concat(val._id) + ' style="width:80%;margin:5px">' + subOptions.label + '</label>'
                                             }).join("")
@@ -694,6 +720,54 @@
                                         }
                                     }
 
+                                    else if (val.field_json.type === 'checkbox-group') {
+
+                                        _temp.push('<div class="form-group">' +
+                                            // '<div class="form-radio" style="width:100%">' +
+                                            '<label for=' + val._id + '> ' + val.field_json.label + '</label>' +
+                                            '<ul class="ks-cboxtags" id==' + val._id + '>' +
+                                            val.field_json.values.map((subOptions, i) => {
+                                                debugger
+                                                return (
+                                                    // <li><input hidden type="checkbox" id="checkboxOne" value="Rainbow Dash"><label for="checkboxOne">Rainbow Dash</label></li>  === > oninvalid='+'event.preventDefault()'+';'+'alert("haii")'+ '
+                                                    '<li>' +
+                                                    '<input hidden type=checkbox    ' + handleChecked(i) + ' name=' + val._id + ' value=' + subOptions.label.trim().concat('__').concat(val._id) + ' id=' + subOptions.label.trim().concat('__').concat(val._id) + '   />' +
+                                                    '<label for=' + subOptions.label.trim().concat('__').concat(val._id) + '>' + subOptions.label + '</label>' +
+                                                    '</li>'
+                                                )
+
+                                            }).join("")
+                                            +
+                                            '</ul>' +
+                                            // '<input type='+val.field_json.type+' name=' + val._id + ' value="female" id="f" />' +
+                                            // '<label for="f">data</label>' +
+                                            '</div>' +
+                                            // '</div>' +
+                                            '</div>')
+
+
+                                        if ((_temp.length % 2 === 0)) {
+                                            _arr.push('<div class="form-row">' +
+                                                _temp.join('')
+                                                + '</div>')
+
+                                            _temp = []
+                                        }
+                                        else {
+                                            if (data.length - 1 === i) {
+                                                _arr.push('<div class="form-row">' +
+                                                    _temp.join('')
+                                                    + '</div>')
+
+                                                _temp = []
+                                            }
+                                        }
+
+
+
+
+
+                                    }
                                 })
                                 console.log("array", _arr)
                                 document.getElementById("collapse-22").innerHTML += _arr.join("")
@@ -740,17 +814,34 @@
                 console.log(_document, '_document_document')
                 return '_document'
             }
-            const _getChecked = (name) => {
+            const _getChecked = (name, type) => {
                 let _isChecked = document.getElementsByName(name)
-                for (i = 0; i < _isChecked.length; i++) {
-                    if (_isChecked[i].checked) {
-                        _isChecked = _isChecked[i].value
-                        break;
-                    }
+                let arr = []
+                // _isChecked.filter(val=>return _isChecked[i].checked)
+                if (type === "checkbox") {
+                    for (i = 0; i < _isChecked.length; i++) {
+                        if (_isChecked[i].checked) {
+                            arr.push(_isChecked[i].value)
+                            // break;
+                        }
 
+                    }
+                    _isChecked = JSON.stringify(arr)
                 }
+                else {
+                    for (i = 0; i < _isChecked.length; i++) {
+                        if (_isChecked[i].checked) {
+                            _isChecked = _isChecked[i].value
+                            break;
+                        }
+
+                    }
+                }
+
+                debugger
                 return _isChecked
             }
+
             const _getSelected = (name) => {
                 let _document = document.getElementById(name).selected
                 return _document
@@ -789,6 +880,13 @@
                         _temp_storage['answer'] = _getChecked(val.id)
                         _api_obj['answers'].push(_temp_storage)
                     }
+                    else if (val.type === 'checkbox-group') {
+                        let _temp_storage = {}
+                        _temp_storage['id'] = val.id
+                        _temp_storage['answer'] = _getChecked(val.id, 'checkbox')
+                        _api_obj['answers'].push(_temp_storage)
+                        debugger
+                    }
                     else if (val.type === 'text') {
                         let _temp_storage = {}
                         _temp_storage['id'] = val.id
@@ -809,6 +907,7 @@
                     }
                 })
             }
+            debugger
             formData.append('answers', JSON.stringify(_api_obj));
             document.getElementById('loading').style.display = 'block'
             debugger
@@ -879,25 +978,27 @@
                 // }, 1500)
                 // })
             }
-            // await fetch(`${Api}api/postanswers`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json;charset=utf-8'
-            //     },
-            //     body: JSON.stringify(_api_obj)
-            // })
-            //     .then(response => response.json())
-            //     .then(res => {
-            //         document.getElementById('loading').style.display = 'none'
-            //         document.getElementById('fill-form').style.display = "none"
-            //         document.getElementById('conf-modal').style.display = 'block'
+            else {
+                await fetch(`${Api}api/postanswers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(_api_obj)
+                })
+                    .then(response => response.json())
+                    .then(res => {
+                        document.getElementById('loading').style.display = 'none'
+                        document.getElementById('fill-form').style.display = "none"
+                        document.getElementById('conf-modal').style.display = 'block'
 
-            //         setTimeout(() => {
-            //             window.location.replace("http://wrapupeventz.com/")
-            //         }, 1500)
-            //         console.log('resOfPostAnswers', res)
-            //         // window.location.pathname="/opportunities"
-            //     })
+                        setTimeout(() => {
+                            window.location.replace("http://wrapupeventz.com/")
+                        }, 1500)
+                        console.log('resOfPostAnswers', res)
+                        // window.location.pathname="/opportunities"
+                    })
+            }
             console.log(_api_obj, "_api_obj_api_obj_api_obj")
             return false
         }
